@@ -115,6 +115,7 @@ namespace NHibernateTestProject.Controllers
         public ActionResult Edit(int id)
         {
             var book = _session.GetBookById(id);
+           
             ViewData["CategoriesId"] = new SelectList(_session.Categories, "category_id", "Name", book.category_id);
 
          
@@ -133,11 +134,12 @@ namespace NHibernateTestProject.Controllers
 
                 _session.BeginTransaction();
                 var booktoUpdate = _session.GetBookById(id); //Important
+                Category c = _session.Categories.Where(c => c.category_id == book.category_id).FirstOrDefault();
+                booktoUpdate.Category = c;
 
-
-               booktoUpdate.Title = book.Title;
+                booktoUpdate.Title = book.Title;
                 booktoUpdate.Author = book.Author;
-                booktoUpdate.category_id= book.category_id;
+ 
 
                 _session.SaveBook(booktoUpdate);
                 _session.Commit();

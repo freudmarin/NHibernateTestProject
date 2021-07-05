@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.Author)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category.category_id)
+             Category Name
             </th>
             <th></th>
         </tr>
@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.category_id)
+                @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
                 <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.book_id">
