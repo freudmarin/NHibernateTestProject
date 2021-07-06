@@ -11,6 +11,6 @@ namespace NHibernateTestProject.Models
         public virtual string Name { get; set; }
 
 
-        public virtual IList<Book> Books { get; set; }
+    //    public virtual IList<Book> Books { get; set; }
     }
 }

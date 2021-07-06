@@ -7,10 +7,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using NHibernate;
 using NHibernate.Linq;
 using NHibernateTestProject.Models;
 using NHibernateTestProject.NHibernate;
-
 namespace NHibernateTestProject.Controllers
 {
     public class BookController : Controller
@@ -63,6 +63,10 @@ namespace NHibernateTestProject.Controllers
 
         public async Task<IActionResult> Index()
         {
+           
+                _session.BeginTransaction();
+           
+          //  IQuery sqlQuery = _session.CreateSQLQuery("Select c.Name from dbo.category c inner join dbo.Book b on c.category_id = b.category_id group by c.Name having count(c.category_id) = (Select Max(Total) from CountByCategory)");
             try
             {
                 var models = await _session.RunInTransaction(async () =>
@@ -70,8 +74,12 @@ namespace NHibernateTestProject.Controllers
                     var books = await _session.Books
 
                                               .ToListAsync();
+
+
+
                     return books;//_mapper.Map<List<BookMap>>(books);
                 });
+    
 
                 return View(models);
             }
@@ -96,22 +104,42 @@ namespace NHibernateTestProject.Controllers
         public ActionResult Create(Book book)
         {
 
+            //if (ModelState.IsValid)
+            //{
+
+                ViewData["CategoriesId"] = new SelectList(_session.Categories, "category_id", "Name", book.category_id);
+                try
+                {
+                    _session.BeginTransaction();
+                    Category c = _session.Categories.Where(c => c.category_id == book.category_id).FirstOrDefault();
+
+                    book.Category = c;
 
 
-            ViewData["CategoriesId"] = new SelectList(_session.Categories, "category_id", "Name", book.category_id);
+                    _session.SaveBook(book);
+                    _session.Commit();
+
+
+         //       _session.CloseTransaction();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            //else
+            //    return View();
+            //else
+            //{
+            //    string messages = string.Join("; ", ModelState.Values
+            //                            .SelectMany(x => x.Errors)
+            //                            .Select(x => x.ErrorMessage));
          
-            _session.BeginTransaction();
-            Category c = _session.Categories.Where(c => c.category_id == book.category_id).FirstOrDefault();
-            book.Category = c;
-                  _session.SaveBook(book);
-                _session.Commit();
-       
+            //    return View(messages);
+            //}
 
-
-               return RedirectToAction("Index");
-             
-         
-        }
+        
         public ActionResult Edit(int id)
         {
             var book = _session.GetBookById(id);
@@ -144,7 +172,7 @@ namespace NHibernateTestProject.Controllers
                 _session.SaveBook(booktoUpdate);
                 _session.Commit();
 
-
+            //    _session.CloseTransaction();
                 return RedirectToAction("Index");
             }
             catch
@@ -163,7 +191,7 @@ namespace NHibernateTestProject.Controllers
                 var book = _session.GetBookById(id);
                 _session.Delete(book);
                 _session.Commit();
-
+                _session.CloseTransaction();
 
                 return RedirectToAction("Index");
             }

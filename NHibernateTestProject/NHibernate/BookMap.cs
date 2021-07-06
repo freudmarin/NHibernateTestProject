@@ -47,7 +47,7 @@ namespace NHibernateTestProject
               x.Column("category_id");
               
                // x.NotNullable(true);
-                x.Lazy(LazyRelation.NoProxy);
+             //  x.Lazy(LazyRelation.NoProxy);
             });
            
         }

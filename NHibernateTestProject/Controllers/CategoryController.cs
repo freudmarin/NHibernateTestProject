@@ -98,7 +98,7 @@ namespace NHibernateTestProject.Controllers
 
 
 
-                return RedirectToAction("Index");
+                  return RedirectToAction("Index");
             }
             catch (Exception exception)
             {

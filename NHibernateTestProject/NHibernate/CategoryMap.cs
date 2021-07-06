@@ -14,7 +14,7 @@ namespace NHibernateTestProject.NHibernate
         public CategoryMap()
         {
             Table("category");
-            Lazy(true);
+           this.Lazy(true);
             Id(x => x.category_id, x =>
             {
                 x.Column("category_id");
@@ -36,37 +36,37 @@ namespace NHibernateTestProject.NHibernate
             //    bag.Cascade(Cascade.DeleteOrphans); //set cascade strategy
             //    bag.Key(k => k.Column(col => col.Name("CategroyId"))); //foreign key in Category table
             //}, a => a.OneToMany());
-            //    this.List(x => x.Books, x =>
+        //    this.List(x => x.Books, x =>
 
-            //    {
+        //    {
 
-            //        x.Key(y =>
+        //        x.Key(y =>
 
-            //        {
-
-            //            y.Column("category_id");
-
-            //            y.NotNullable(true);
-
-            //        });
+        //        {
 
 
 
-            //        x.Lazy(CollectionLazy.Lazy);
+        //            y.NotNullable(true);
 
-            //        x.Cascade(Cascade.All | Cascade.DeleteOrphans);
+        //        });
 
-            //        x.Inverse(true);
 
-            //    }, x =>
 
-            //    {
+        //        x.Lazy(CollectionLazy.Lazy);
 
-            //        x.OneToMany();
+        //        x.Cascade(Cascade.All | Cascade.DeleteOrphans);
 
-            //    });
+        //        x.Inverse(true);
 
-            //}
-        }
+        //    }, x =>
+
+        //    {
+
+        //        x.OneToMany();
+
+        //    });
+
+        //}
+    }
     }
 }
