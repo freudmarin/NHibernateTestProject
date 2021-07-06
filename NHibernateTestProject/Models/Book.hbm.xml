@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+assembly="NHibernateTestProject"
+namespace="NHibernateTestProject.Models">
+	<class name="Book">
+		<id name="book_id">
+			<!--At Book Tables-->
+			<generator class="identity"/>
+		</id>
+		<property name="Title" type="string"/>
+		<property name="Author" type="string"/>
+		<property name="price" type="int"/>
+		<property name="stock" type="int"/>
+
+		<many-to-one name="Category" column="category_id"  class="Category" />
+		<set name="Reviews" table="ReviwedBooks">
+			<key column="book_id"/> <!--at ReviewdBooks Table-->
+			<many-to-many class="Review" column="review_id"/>
+
+		</set>
+	
+		</class>
+</hibernate-mapping>

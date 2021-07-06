@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+assembly="NHibernateTestProject"
+namespace="NHibernateTestProject.Models">
+	<class name="User">
+		<id name="user_id">
+			<!--At Book Tables-->
+			<generator class="identity"/>
+		</id>
+		<property name="username" type="string"/>
+		<property name="fullname" type="string"/>
+		<property name="email" type="string"/>
+		<property name="bankCardNumber" type="string"/>
+		<property name="password" type="string"/>
+
+		
+		<set name="Reviews" table="ReviewedBooks">
+			<key column="user_id"/>
+			<!--at ReviewdBooks Table-->
+			
+			<many-to-many class="Review" column="review_id"/>
+			
+		</set>
+
+		<set name="Books" table="BuyedBooks">
+			<key column="user_id"/>
+			
+			<!--at ByeedBooks Table-->
+			<many-to-many class="Book" column="book_id"/>
+
+		</set>
+
+	</class>
+</hibernate-mapping>

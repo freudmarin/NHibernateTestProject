@@ -15,7 +15,7 @@ namespace NHibernateTestProject.NHibernate.Extensions
         public static IServiceCollection AddNHibernate(this IServiceCollection services, string connectionString)
         {
             var mapper = new ModelMapper();
-            mapper.AddMappings(typeof(NHibernateExtensions).Assembly.ExportedTypes);
+       //   mapper.AddMappings(typeof(NHibernateExtensions).Assembly.ExportedTypes);
             HbmMapping domainMapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
             var configuration = new Configuration();
@@ -24,13 +24,17 @@ namespace NHibernateTestProject.NHibernate.Extensions
                 c.Dialect<MsSql2012Dialect>();
                 c.ConnectionString = connectionString;
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                c.SchemaAction = SchemaAutoAction.Update; //very important
+                c.SchemaAction = SchemaAutoAction.Create; //very important
                 c.LogFormattedSql = true;
                 c.LogSqlInConsole = true;
             });
          
             configuration.AddMapping(domainMapping);
-
+           configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\Book.hbm.xml");
+            configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\Review.hbm.xml");
+            configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\Category.hbm.xml");
+            configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\User.hbm.xml");
+    
             var sessionFactory = configuration.BuildSessionFactory();
             //Same for every request
             services.AddSingleton(sessionFactory);

@@ -34,6 +34,19 @@ namespace NHibernateTestProject
                 x.NotNullable(true);
             });
 
+            Property(b => b.price, x =>
+            {
+                
+                x.Type(NHibernateUtil.Int32);
+                x.NotNullable(true);
+            });
+
+            Property(b => b.stock, x =>
+            {
+
+                x.Type(NHibernateUtil.Int32);
+                x.NotNullable(true);
+            });
 
             Property(b => b.Author, x =>
                 {

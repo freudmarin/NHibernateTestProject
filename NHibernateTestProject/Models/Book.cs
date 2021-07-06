@@ -12,6 +12,10 @@ namespace NHibernateTestProject.Models
         public virtual string Author { get; set; }
 
         public virtual  int category_id { get; set; }
+
+        public virtual int price { get; set; }
+        public virtual int stock { get; set; }
+        public virtual ISet<Review> Reviews { get; set; }
         public virtual Category Category { get; set; }
     }
 }

@@ -27,7 +27,9 @@ namespace NHibernateTestProject
             var connStr = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddNHibernate(connStr);
-          
+
+            // Add NHibernate related services
+
             services.AddControllersWithViews();
 
         }
