@@ -104,8 +104,7 @@ namespace NHibernateTestProject.Controllers
         public ActionResult Create(Book book)
         {
 
-            //if (ModelState.IsValid)
-            //{
+            
 
                 ViewData["CategoriesId"] = new SelectList(_session.Categories, "category_id", "Name", book.category_id);
                 try
@@ -120,7 +119,7 @@ namespace NHibernateTestProject.Controllers
                     _session.Commit();
 
 
-         //       _session.CloseTransaction();
+                    //       _session.CloseTransaction();
                     return RedirectToAction("Index");
                 }
                 catch
@@ -128,6 +127,8 @@ namespace NHibernateTestProject.Controllers
                     return View();
                 }
             }
+           
+        
             //else
             //    return View();
             //else
@@ -156,29 +157,34 @@ namespace NHibernateTestProject.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Book book)
         {
-            ViewData["CategoriesId"] = new SelectList(_session.Categories, "category_id", "Name", book.category_id);
-            try
+            if (ModelState.IsValid)
             {
+                ViewData["CategoriesId"] = new SelectList(_session.Categories, "category_id", "Name", book.category_id);
+                try
+                {
 
-                _session.BeginTransaction();
-                var booktoUpdate = _session.GetBookById(id); //Important
-                Category c = _session.Categories.Where(c => c.category_id == book.category_id).FirstOrDefault();
-                booktoUpdate.Category = c;
+                    _session.BeginTransaction();
+                    var booktoUpdate = _session.GetBookById(id); //Important
+                    Category c = _session.Categories.Where(c => c.category_id == book.category_id).FirstOrDefault();
+                    booktoUpdate.Category = c;
 
-                booktoUpdate.Title = book.Title;
-                booktoUpdate.Author = book.Author;
- 
+                    booktoUpdate.Title = book.Title;
+                    booktoUpdate.Author = book.Author;
 
-                _session.SaveBook(booktoUpdate);
-                _session.Commit();
 
-            //    _session.CloseTransaction();
-                return RedirectToAction("Index");
+                    _session.SaveBook(booktoUpdate);
+                    _session.Commit();
+
+                    //    _session.CloseTransaction();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            else
+            return View(book);
         }
 
         [HttpPost]

@@ -88,22 +88,19 @@ namespace NHibernateTestProject.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            try
-            {
+            
+             
 
-                _session.BeginTransaction();
-        
-                _session.SaveCategory(category);
-                _session.Commit();
+                    _session.BeginTransaction();
+
+                    _session.SaveCategory(category);
+                    _session.Commit();
 
 
 
-                  return RedirectToAction("Index");
-            }
-            catch (Exception exception)
-            {
-                return View();
-            }
+                    return RedirectToAction("Index");
+               
+          
         }
         public ActionResult Edit(int id)
         {
@@ -118,26 +115,35 @@ namespace NHibernateTestProject.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Category category)
         {
-            try
+            if (id != category.category_id)
             {
-
-                _session.BeginTransaction();
-                var categorytoUpdate = _session.GetCategoryById(id); //Important
-
-
-                categorytoUpdate.Name = category.Name;
-
-
-                _session.SaveCategory(categorytoUpdate);
-                _session.Commit();
-
-
-                return RedirectToAction("Index");
+                return BadRequest();
             }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+
+                    _session.BeginTransaction();
+                    var categorytoUpdate = _session.GetCategoryById(id); //Important
+
+
+                    categorytoUpdate.Name = category.Name;
+
+
+                    _session.SaveCategory(categorytoUpdate);
+                    _session.Commit();
+
+
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
+            else
+            return View(category);
         }
 
         [HttpPost]
