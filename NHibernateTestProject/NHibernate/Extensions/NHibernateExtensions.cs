@@ -24,7 +24,7 @@ namespace NHibernateTestProject.NHibernate.Extensions
                 c.Dialect<MsSql2012Dialect>();
                 c.ConnectionString = connectionString;
                 c.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                c.SchemaAction = SchemaAutoAction.Create; //very important
+                c.SchemaAction = SchemaAutoAction.Update; //very important
                 c.LogFormattedSql = true;
                 c.LogSqlInConsole = true;
             });
