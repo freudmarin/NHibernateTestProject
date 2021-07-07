@@ -13,14 +13,20 @@ namespace="NHibernateTestProject.Models">
 		<property name="bankCardNumber" type="string"/>
 		<property name="password" type="string"/>
 
-		
+		<!--	
 		<set name="Reviews" table="ReviewedBooks">
 			<key column="user_id"/>
+			at ReviewdBooks Table-->
+
+
+		<set name="Reviews"  table="ReviwedBooks">
+			<key column="user_id"/>
 			<!--at ReviewdBooks Table-->
-			
 			<many-to-many class="Review" column="review_id"/>
-			
+		
 		</set>
+			
+		
 
 		<set name="Books" table="BuyedBooks">
 			<key column="user_id"/>

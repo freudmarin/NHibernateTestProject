@@ -11,6 +11,6 @@ namespace NHibernateTestProject.Models
 
         public virtual string  review_text { get; set; }
 
-      
+        public virtual User User { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace="NHibernateTestProject.Models">
 		<many-to-one name="Category" column="category_id"  class="Category" />
 		<set name="Reviews" table="ReviwedBooks">
 			<key column="book_id"/> <!--at ReviewdBooks Table-->
-			<many-to-many class="Review" column="review_id"/>
+			<element column="score" type="int"/>
 
 		</set>
 	

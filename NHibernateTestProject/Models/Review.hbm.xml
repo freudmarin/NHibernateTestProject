@@ -6,6 +6,7 @@ namespace="NHibernateTestProject.Models">
 		<id name="review_id">
 			<generator class="identity"/>
 		</id>
+	
 		<property name="review_text"/>
 
 	</class>
