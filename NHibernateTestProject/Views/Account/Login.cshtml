@@ -1,18 +1,18 @@
-﻿@model NHibernateTestProject.Models.User
+﻿@model NHibernateTestProject.Models.ViewModels.UserLoginViewModel
 
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Login</h1>
+<h3 style="text-align:center;"> Login </h3>
 
-<h4>User</h4>
-<hr />
-<div class="row">
+<div class="row" style="padding-left:40px;">
     <div class="col-md-4">
+
+
         <form asp-action="Login" method="post">
-            
+
 
             <div class="form-group">
                 <label asp-for="username" class="control-label"></label>
@@ -36,12 +36,9 @@
                 </p>
             </div>
             <div asp-validation-summary="All" class="text-danger"></div>
-            
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        </form>
+
 </div>
+    </div>
 

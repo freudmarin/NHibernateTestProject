@@ -20,7 +20,7 @@ namespace NHibernateTestProject.Controllers
       
         public IActionResult Login()
         {
-            return View(new User());
+            return View(new UserLoginViewModel());
         }
 
         [HttpPost]
