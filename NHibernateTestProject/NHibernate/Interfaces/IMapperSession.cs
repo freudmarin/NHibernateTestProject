@@ -16,7 +16,9 @@ namespace NHibernateTestProject.NHibernate
         Task Delete(Book entity);
         Book GetBookById(int id);
 
-
+        Task SaveUser(User entity);
+        Task Delete(User entity);
+        User GetUserById(int id);
 
         Task SaveCategory(Category entity);
         Task Delete(Category entity);
@@ -24,7 +26,8 @@ namespace NHibernateTestProject.NHibernate
 
         IQueryable<Book> Books { get; }
             IQueryable<Category> Categories { get; }
-
+        IQueryable<User> Users { get; }
+        bool LoginUser(string username, string password); 
         public async Task<T> RunInTransaction<T>(Func<Task<T>> func)
         {
             try

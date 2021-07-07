@@ -20,6 +20,8 @@ namespace NHibernateTestProject.NHibernate
         public IQueryable<Book> Books => _session.Query<Book>();
         public IQueryable<Category> Categories => _session.Query<Category>();
 
+        public IQueryable<User> Users => _session.Query<User>();
+
         public void BeginTransaction()
         {
             _transaction = _session.BeginTransaction();
@@ -71,6 +73,24 @@ namespace NHibernateTestProject.NHibernate
         public Category GetCategoryById(int id)
         {
             return _session.Query<Category>().Where(x => x.category_id == id).FirstOrDefault();
+        }
+        public async Task SaveUser(User entity)
+        {
+            await _session.SaveOrUpdateAsync(entity);
+        }
+
+        public async Task Delete(User entity)
+        {
+            await _session.DeleteAsync(entity);
+        }
+
+        public User GetUserById(int id)
+        {
+            return _session.Query<User>().Where(x => x.user_id == id).FirstOrDefault();
+        }
+       public  bool LoginUser(string username, string password)
+        {
+            return _session.Query<User>().Where(x => x.username == username && x.password == password).Any();
         }
     }
 }
