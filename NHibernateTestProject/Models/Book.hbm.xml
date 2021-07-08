@@ -13,11 +13,10 @@ namespace="NHibernateTestProject.Models">
 		<property name="stock" type="int"/>
 
 		<many-to-one name="Category" column="category_id"  class="Category" />
-		<set name="Reviews" table="ReviwedBooks">
-			<key column="book_id"/> <!--at ReviewdBooks Table-->
-			<element column="score" type="int"/>
+		<!--	<set name="Reviews" table="ReviwedBooks">
+			<key column="book_id"/> at ReviewdBooks Table
+		<element column="score" type="int"/>
 
-		</set>
-	
-		</class>
+		</set> -->
+	</class>
 </hibernate-mapping>

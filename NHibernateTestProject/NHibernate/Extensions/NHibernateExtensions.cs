@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
@@ -34,7 +35,9 @@ namespace NHibernateTestProject.NHibernate.Extensions
             configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\Review.hbm.xml");
             configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\Category.hbm.xml");
             configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\User.hbm.xml");
-    
+            configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\ReviewedBooks.hbm.xml");
+            configuration.AddXmlFile("C:\\Users\\marin.dulja\\source\\repos\\NHibernateTestProject\\NHibernateTestProject\\Models\\BuyedBooks.hbm.xml");
+
             var sessionFactory = configuration.BuildSessionFactory();
             //Same for every request
             services.AddSingleton(sessionFactory);
@@ -42,8 +45,20 @@ namespace NHibernateTestProject.NHibernate.Extensions
             //same within a request,different across different requests
             services.AddScoped(factory => sessionFactory.OpenSession());
             services.AddScoped<IMapperSession, NHibernateMapperSession>();
+            ISession session = sessionFactory.OpenSession();
+         
+
+
+
+
+
+
+
+
 
             return services;
         }
+   
+  
     }
 }

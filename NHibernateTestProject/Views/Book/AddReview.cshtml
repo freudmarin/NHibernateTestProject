@@ -1,0 +1,32 @@
+﻿@model NHibernateTestProject.Models.ViewModels.UserReviewModel
+
+@{
+    ViewData["Title"] = "AddReview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="text-align:center;">Add Review </h3>
+
+<div class="row" style="padding-left:40px;">
+    <div class="col-md-4">
+        <form asp-action="AddReview">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="review_id" class="form-control" />
+            <div class="form-group">
+                <label asp-for="review_text" class="control-label"></label>
+                <input asp-for="review_text" class="form-control" />
+                <span asp-validation-for="review_text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="score" class="control-label"></label>
+                <input asp-for="score" class="form-control" />
+                <span asp-validation-for="score" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

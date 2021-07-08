@@ -15,6 +15,8 @@ namespace NHibernateTestProject.NHibernate
         public NHibernateMapperSession(ISession session)
         {
             _session = session;
+
+
         }
 
         public IQueryable<Book> Books => _session.Query<Book>();
@@ -56,7 +58,7 @@ namespace NHibernateTestProject.NHibernate
             await _session.DeleteAsync(entity);
         }
 
-        public   Book GetBookById(int id)
+        public Book GetBookById(int id)
         {
             return _session.Query<Book>().Where(x => x.book_id == id).FirstOrDefault();
         }
@@ -64,7 +66,7 @@ namespace NHibernateTestProject.NHibernate
         {
             await _session.SaveOrUpdateAsync(entity);
         }
-  
+
         public async Task Delete(Category entity)
         {
             await _session.DeleteAsync(entity);
@@ -76,9 +78,18 @@ namespace NHibernateTestProject.NHibernate
         }
         public async Task SaveUser(User entity)
         {
+
             await _session.SaveOrUpdateAsync(entity);
         }
+        public async Task SaveReview(Review entity)
+        {
 
+            await _session.SaveOrUpdateAsync(entity);
+        }
+        public async Task SaveReviewUser(ReviewedBooks entity)
+        {
+            await _session.SaveOrUpdateAsync(entity);
+        }
         public async Task Delete(User entity)
         {
             await _session.DeleteAsync(entity);
@@ -92,5 +103,19 @@ namespace NHibernateTestProject.NHibernate
         {
             return _session.Query<User>().Where(x => x.username == username && x.password == password).Any();
         }
+        public bool isAdmin(string username, string password)
+        {
+            return _session.Query<User>().Where(x => x.username == username && x.password == password && x.role=="admin").Any();
+        }
+        public int GetUserID(string username, string password)
+        {
+            User user = _session.Query<User>().Where(x => x.username == username && x.password == password).First();
+            return user.user_id;
+        }
+        public async Task SavePurchase(BuyedBooks entity)
+        {
+            await _session.SaveOrUpdateAsync(entity);
+        }
+
     }
 }

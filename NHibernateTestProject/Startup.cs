@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NHibernate;
 using NHibernateTestProject.NHibernate.Extensions;
 
 namespace NHibernateTestProject
@@ -27,7 +28,7 @@ namespace NHibernateTestProject
             var connStr = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddNHibernate(connStr);
-
+          
             // Add NHibernate related services
 
             services.AddControllersWithViews();

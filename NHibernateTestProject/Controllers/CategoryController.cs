@@ -60,6 +60,9 @@ namespace NHibernateTestProject.Controllers
 
         public async Task<IActionResult> Index()
         {
+
+            string role = (string)TempData["role"];
+            @ViewBag.role = role;
             try
             {
                 var models = await _session.RunInTransaction(async () =>

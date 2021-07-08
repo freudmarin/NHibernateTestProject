@@ -6,10 +6,18 @@
 }
 
 <h3 style="text-align:center;">List of books </h3>
+@if (ViewBag.role == "admin")
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<form asp-action="DisplayCategories" method="get">
+    <button type="submit" class="btn btn-sm btn-danger">
+        Categories
+    </button>
+</form>
+}
 <table class="table" style="margin-left:5px;">
     <thead>
         <tr>
@@ -25,9 +33,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stock)
-            </th>
+            @if (ViewBag.role == "admin")
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.stock)
+                </th>
+            }
             <th>
                 Category Name
             </th>
@@ -35,7 +46,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.book_id)
@@ -49,26 +61,51 @@
             <td>
                 @Html.DisplayFor(modelItem => item.price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.stock)
-            </td>
+            @if (ViewBag.role == "admin")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.stock)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
-            <td>
-                <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.book_id">
-                    Update
-                </a>
-            </td>
-            <td>
-                <form asp-action="Delete" asp-route-id="@item.book_id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        Delete
-                    </button>
-                </form>
-            </td>
+            @if (ViewBag.role == "admin")
+            {
+
+                <td>
+                    <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.book_id">
+                        Update
+                    </a>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@item.book_id" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            }
+            else
+            {
+
+                <td>
+                    <form asp-action="Buy" asp-controller="Book" asp-route-bookID="@item.book_id" method="post">
+                        <button type="submit" class="btn btn-sm btn-success">
+                            Buy
+                        </button>
+
+                    </form>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="AddReview" asp-route-bookID="@item.book_id">
+                       Add Review
+                    </a>
+                </td>
+
+            }
         </tr>
-        
-}
+
+        }
     </tbody>
 </table>

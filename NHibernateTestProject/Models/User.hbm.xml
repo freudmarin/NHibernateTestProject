@@ -9,6 +9,7 @@ namespace="NHibernateTestProject.Models">
 		</id>
 		<property name="username" type="string"/>
 		<property name="fullname" type="string"/>
+		<property name="role" type="string"/>
 		<property name="email" type="string"/>
 		<property name="bankCardNumber" type="string"/>
 		<property name="password" type="string"/>
@@ -16,12 +17,12 @@ namespace="NHibernateTestProject.Models">
 		<!--	
 		<set name="Reviews" table="ReviewedBooks">
 			<key column="user_id"/>
-			at ReviewdBooks Table-->
+			at ReviewdBooks Table
 
 
 		<set name="Reviews"  table="ReviwedBooks">
 			<key column="user_id"/>
-			<!--at ReviewdBooks Table-->
+	
 			<many-to-many class="Review" column="review_id"/>
 		
 		</set>
@@ -31,10 +32,10 @@ namespace="NHibernateTestProject.Models">
 		<set name="Books" table="BuyedBooks">
 			<key column="user_id"/>
 			
-			<!--at ByeedBooks Table-->
+			
 			<many-to-many class="Book" column="book_id"/>
 
 		</set>
-
+-->
 	</class>
 </hibernate-mapping>

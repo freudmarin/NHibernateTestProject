@@ -10,7 +10,7 @@
 <body>
     <div class="container" style="margin-left:0px;">
         <nav class="navbar navbar-expand-sm bg active">
-            <a class="navbar-brand" asp-controller="home" asp-action="index">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
              
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -21,23 +21,25 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Book" asp-action="Index">Books</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-                    </li>
                    
-                    <li>
-                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post"  class="navbar-right">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Dilni</button>
-                                </li>
-                            </ul>
-                        </form>
-                    </li>
-                </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a>
+                        </li>
+                    
+                        <li>
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+
+                        <li>
+                            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="navbar-right">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <button type="submit" class="btn btn-link navbar-btn navbar-link">Dilni</button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
             </div>
         </nav>
         </div>
